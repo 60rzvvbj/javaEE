@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="arithmeticAdd" class="spring2.com.ex01.testspring.ArithmeticAddImpl"/>
+    <bean id="arithmeticSub" class="spring2.com.ex01.testspring.ArithmeticSubImpl"/>
+    <bean id="arithmeticMul" class="spring2.com.ex01.testspring.ArithmeticMulImpl"/>
+    <bean id="arithmeticDiv" class="spring2.com.ex01.testspring.ArithmeticDivImpl"/>
+</beans>
