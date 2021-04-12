@@ -9,7 +9,7 @@
                            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
                            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="spring4.com"/>
+<!--    <context:component-scan base-package="spring4.com"/>-->
     <context:property-placeholder location="classpath:druid.properties"/>
 
     <!-- jdbc相关 -->

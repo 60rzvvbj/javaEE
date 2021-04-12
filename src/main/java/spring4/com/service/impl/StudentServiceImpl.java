@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
         student1.setMno(student2.getMno());
         student2.setMno(t);
         studentDao.updateStudent(student1);
-//        t = 1 / 0;
+        t = 1 / 0;
         studentDao.updateStudent(student2);
     }
 }
