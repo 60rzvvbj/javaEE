@@ -67,4 +67,16 @@ public class SC {
     public void setZp(double zp) {
         this.zp = zp;
     }
+
+    @Override
+    public String toString() {
+        return "SC{" +
+                "sno=" + sno +
+                ", cno=" + cno +
+                ", tno=" + tno +
+                ", ps=" + ps +
+                ", ks=" + ks +
+                ", zp=" + zp +
+                '}';
+    }
 }

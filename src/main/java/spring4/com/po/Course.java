@@ -37,4 +37,13 @@ public class Course {
     public void setChours(int chours) {
         this.chours = chours;
     }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "cno=" + cno +
+                ", cn='" + cn + '\'' +
+                ", chours=" + chours +
+                '}';
+    }
 }

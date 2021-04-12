@@ -1,9 +1,7 @@
 package spring4.com.dao.impl;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
-import org.springframework.stereotype.Repository;
 import spring4.com.dao.StudentDao;
 import spring4.com.po.Student;
 
@@ -13,10 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-@Repository("studentDao")
 public class StudentDaoImpl implements StudentDao {
 
-    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {

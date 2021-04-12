@@ -57,4 +57,15 @@ public class Teacher {
     public void setTdel(String tdel) {
         this.tdel = tdel;
     }
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "tno=" + tno +
+                ", tn='" + tn + '\'' +
+                ", tsex='" + tsex + '\'' +
+                ", trank='" + trank + '\'' +
+                ", tdel='" + tdel + '\'' +
+                '}';
+    }
 }

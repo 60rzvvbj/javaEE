@@ -12,6 +12,7 @@
     <context:component-scan base-package="spring4.com"/>
     <context:property-placeholder location="classpath:druid.properties"/>
 
+    <!-- jdbc相关 -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driverClassName}"></property>
         <property name="url" value="${jdbc.url}"></property>
@@ -23,9 +24,41 @@
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
+    <!-- dao层 -->
+    <bean id="studentDao" class="spring4.com.dao.impl.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="courseDao" class="spring4.com.dao.impl.CourseDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="teacherDao" class="spring4.com.dao.impl.TeacherDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <bean id="SCDao" class="spring4.com.dao.impl.SCDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"></property>
+    </bean>
+
+    <!-- service层 -->
+    <bean id="studentService" class="spring4.com.service.impl.StudentServiceImpl">
+        <property name="studentDao" ref="studentDao"></property>
+    </bean>
+
+    <!-- 事务控制 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
         <property name="dataSource" ref="dataSource"></property>
     </bean>
 
-    <tx:annotation-driven transaction-manager="transactionManager"/>
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="exchangeMajor"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* spring4.com.service.impl.*.*(..))"></aop:advisor>
+    </aop:config>
+
 </beans>
