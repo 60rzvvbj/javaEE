@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis1.com.mapper.CourseMapper">
+    <select id="selectCourseByCno" parameterType="Integer" resultType="mybatis1.com.po.Course">
+        select *
+        from course
+        where cno = #{cno};
+    </select>
+    <select id="selectCourseByCname" parameterType="String" resultType="mybatis1.com.po.Course">
+        select *
+        from course
+        where cname like concat('%', #{cname}, '%');
+    </select>
+    <insert id="insertCourse" parameterType="mybatis1.com.po.Course">
+        insert into course(cno, cname, peroid)
+        values  (#{cno}, #{cname}, #{peroid});
+    </insert>
+    <delete id="deleteCourse" parameterType="Integer">
+        delete from stu where cno = #{cno};
+    </delete>
+    <update id="updateCourse" parameterType="mybatis1.com.po.Course">
+        update course
+        set cname = #{cname},
+            peroid = #{peroid}
+        where cno = #{cno}
+    </update>
+</mapper>

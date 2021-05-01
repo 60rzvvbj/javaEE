@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mybatis1.com.mapper.SCMapper">
+    <select id="selectAll" resultType="mybatis1.com.po.SC">
+        select *
+        from sc
+    </select>
+    <insert id="insertSC" parameterType="mybatis1.com.po.SC">
+        insert into sc(sno, cno, tno, partcipation, final, total)
+        values (#{sno}, ${cno}, #{tno}, #{partcipation}, #{final}, #{total});
+    </insert>
+</mapper>
