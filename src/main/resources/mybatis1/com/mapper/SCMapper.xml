@@ -10,4 +10,15 @@
         insert into sc(sno, cno, tno, partcipation, final, total)
         values (#{sno}, ${cno}, #{tno}, #{partcipation}, #{final}, #{total});
     </insert>
+    <select id="selectScoreBySno" parameterType="String" resultMap="selectScoreBySnoMap">
+        select * from sc where sno=#{sno};
+    </select>
+    <resultMap type="mybatis1.com.po.SC" id="selectScoreBySnoMap">
+        <id property="cno" column="cno"/>
+        <id property="sno" column="sno"/>
+        <id property="tno" column="tno"/>
+        <result property="participation" column="participation"/>
+        <result property="final" column="final"/>
+        <result property="total" column="total"/>
+    </resultMap>
 </mapper>

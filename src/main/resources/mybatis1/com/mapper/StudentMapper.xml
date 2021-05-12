@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis1.com.mapper.StudentMapper">
-    <select id="selectStudentBySno" parameterType="String" resultType="mybatis1.com.po.Student">
-        select *
-        from stu
-        where sno = #{sno};
-    </select>
+<!--    <select id="selectStudentBySno" parameterType="String" resultType="mybatis1.com.po.Student">-->
+<!--        select *-->
+<!--        from stu-->
+<!--        where sno = #{sno};-->
+<!--    </select>-->
     <select id="selectStudentBySname" parameterType="String" resultType="mybatis1.com.po.Student">
         select *
         from stu
@@ -29,4 +29,62 @@
             mno=#{mno}
         where sno = #{sno}
     </update>
+    <select id="selectStudent" parameterType="mybatis1.com.po.Student" resultType="mybatis1.com.po.Student">
+        <bind name="search_sname_key" value="'%'+sname+'%'"/>
+        select * from stu
+        <where>
+            <if test="sno!=null and sno!=''">
+                and sno=#{sno}
+            </if>
+            <if test="sname!=null and sname=''">
+                and sname like #{search_sname_key}
+            </if>
+        </where>
+    </select>
+    <select id="selectStudentByList" parameterType="List" resultType="mybatis1.com.po.Student">
+        select * from stu where sname in
+        <foreach item="sname" index="index" collection="list" open="(" separator="," close=")">
+            #{sname}
+        </foreach>
+    </select>
+    <select id="selectStudentScoresBySno" parameterType="String" resultMap="studentScoreMap">
+        select * from stu, sc where stu.sno=#{sno} and stu.sno = sc.sno;
+    </select>
+    <resultMap type="mybatis1.com.po.Student" id="studentScoreMap">
+        <id property="sno" column="sno"/>
+        <result property="sname" column="sname"/>
+        <result property="ssex" column="ssex"/>
+        <result property="snative" column="snative"/>
+        <result property="mno" column="mno"/>
+        <collection property="listScore" ofType="mybatis1.com.po.SC">
+            <id property="cno" column="cno"/>
+            <id property="sno" column="sno"/>
+            <id property="tno" column="tno"/>
+            <result property="participation" column="participation"/>
+            <result property="final" column="final"/>
+            <result property="total" column="total"/>
+        </collection>
+    </resultMap>
+    <select id="selectStudentByCno" parameterType="Integer" resultType="mybatis1.com.po.Student">
+        select * from stu where sno in(
+            select sno from sc where cno=#{cno}
+        )
+    </select>
+    <select id="selectStudentCoursesBySno" parameterType="String" resultMap="studentCourseMap">
+        select *
+        from stu s, course c, sc
+        where s.sno=#{sno} and s.sno = sc.sno and c.cno = sc.cno
+    </select>
+    <resultMap type="mybatis1.com.po.Student" id="studentCourseMap">
+        <id property="sno" column="sno"/>
+        <result property="sname" column="sname"/>
+        <result property="ssex" column="ssex"/>
+        <result property="snative" column="snative"/>
+        <result property="mno" column="mno"/>
+        <collection property="listCourse" ofType="mybatis1.com.po.Course">
+            <id property="cno" column="cno"/>
+            <result property="cname" column="cname"/>
+            <result property="period" column="period"/>
+        </collection>
+    </resultMap>
 </mapper>

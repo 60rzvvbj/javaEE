@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis1.com.mapper.CourseMapper">
-    <select id="selectCourseByCno" parameterType="Integer" resultType="mybatis1.com.po.Course">
-        select *
-        from course
-        where cno = #{cno};
-    </select>
+<!--    <select id="selectCourseByCno" parameterType="Integer" resultType="mybatis1.com.po.Course">-->
+<!--        select *-->
+<!--        from course-->
+<!--        where cno = #{cno};-->
+<!--    </select>-->
     <select id="selectCourseByCname" parameterType="String" resultType="mybatis1.com.po.Course">
         select *
         from course
@@ -25,4 +25,38 @@
             peroid = #{peroid}
         where cno = #{cno}
     </update>
+    <select id="selectCourseByList" parameterType="mybatis1.com.po.Course" resultType="mybatis1.com.po.Course">
+        select * from course where cname in
+        <foreach item="cname" index="index" collection="list" open="(" separator="," close=")">
+            #{cname}
+        </foreach>
+    </select>
+    <select id="selectCourseBookByCno" parameterType="Integer" resultMap="courseBookMap">
+        select *, b.id bid  from course c, book b where cno=#{cno} and b.id = c.cno;
+    </select>
+    <resultMap type="mybatis1.com.po.Course" id="courseBookMap">
+        <id property="cno" column="cno"/>
+        <result property="cname" column="cname"/>
+        <result property="period" column="period"/>
+        <association property="book" javaType="mybatis1.com.po.Book">
+            <id property="id" column="bid"/>
+            <result property="bName" column="bname"/>
+            <result property="price" column="price"/>
+            <result property="pub" column="pub"/>
+        </association>
+    </resultMap>
+    <select id="selectCourseStudentsByCno" parameterType="Integer" resultMap="courseStudentMap">
+        select * from course where cno=#{cno};
+    </select>
+    <resultMap type="mybatis1.com.po.Course" id="courseStudentMap">
+        <id property="cno" column="cno"/>
+        <result property="cname" column="cname"/>
+        <result property="period" column="period"/>
+        <collection property="studentList" column="cno" ofType="mybatis1.com.po.Student" select="mybatis1.com.mapper.StudentMapper.selectStudentByCno"/>
+    </resultMap>
+    <select id="selectCourseBySno" parameterType="Integer" resultType="mybatis1.com.po.Course">
+        select * from course where cno in(
+            select cno from sc where sno=#{sno}
+        )
+    </select>
 </mapper>

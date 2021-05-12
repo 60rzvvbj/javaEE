@@ -18,5 +18,6 @@
         <mapper resource="mybatis1/com/mapper/CourseMapper.xml"/>
         <mapper resource="mybatis1/com/mapper/SCMapper.xml"/>
         <mapper resource="mybatis1/com/mapper/TeacherMapper.xml"/>
+        <mapper resource="mybatis1/com/mapper/BookMapper.xml"/>
     </mappers>
 </configuration>

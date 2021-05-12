@@ -1,21 +1,27 @@
 package mybatis1.com.po;
 
+import java.util.List;
+
 public class Student {
     String sno;
     String sname;
     String ssex;
     String snative;
     int mno;
+    List<SC> listScore;
+    List<Course> listCourse;
 
     public Student() {
     }
 
-    public Student(String sno, String sname, String ssex, String snative, int mno) {
+    public Student(String sno, String sname, String ssex, String snative, int mno, List<SC> listScore, List<Course> listCourse) {
         this.sno = sno;
         this.sname = sname;
         this.ssex = ssex;
         this.snative = snative;
         this.mno = mno;
+        this.listScore = listScore;
+        this.listCourse = listCourse;
     }
 
     public String getSno() {
@@ -58,6 +64,22 @@ public class Student {
         this.mno = mno;
     }
 
+    public List<SC> getListScore() {
+        return listScore;
+    }
+
+    public void setListScore(List<SC> listScore) {
+        this.listScore = listScore;
+    }
+
+    public List<Course> getListCourse() {
+        return listCourse;
+    }
+
+    public void setListCourse(List<Course> listCourse) {
+        this.listCourse = listCourse;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -66,6 +88,8 @@ public class Student {
                 ", ssex='" + ssex + '\'' +
                 ", snative='" + snative + '\'' +
                 ", mno=" + mno +
+                ", listScore=" + listScore +
+                ", listCourse=" + listCourse +
                 '}';
     }
 }

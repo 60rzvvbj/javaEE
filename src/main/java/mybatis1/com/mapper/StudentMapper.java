@@ -14,4 +14,8 @@ public interface StudentMapper {
     public int deleteStudent(String sno);
 
     public int updateStudent(Student stu);
+
+    public List<Student> selectStudent(Student stu);
+
+    public List<Student> selectStudentByList(List<Student> list);
 }
