@@ -10,4 +10,9 @@
     <import resource="spring4.xml"></import>
     <import resource="applicarionContext-user.xml"></import>
     <import resource="druid.xml"></import>
+
+<!--    实验六-->
+<!--    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">-->
+<!--        <property name="basePackage" value="com.mapper"/>-->
+<!--    </bean>-->
 </beans>

@@ -28,4 +28,18 @@
             tel   = #{tel}
         where tno = #{tno}
     </update>
+
+<!--    实验六-->
+<!--    <select id="selectTeacherByTname" parameterType="String" resultType="com.po.Teacher">-->
+<!--        select * from teacher where tname like concat('%',#{tname},'%');-->
+<!--    </select>-->
+<!--    <insert id="insertTeacher" parameterType="com.po.Teacher">-->
+<!--        insert into teacher(tno,tname,tsex,tel) values(#{tno},#{tname},#{tsex},#{tel});-->
+<!--    </insert>-->
+<!--    <delete id="deleteTeacher" parameterType="String">-->
+<!--        delete from teacher where tno=#{tno};-->
+<!--    </delete>-->
+<!--    <update id="updateTeacher" parameterType="com.po.Teacher">-->
+<!--        update teacher set tname=#{tname},tsex=#{tsex},tel=#{tel} where tno=#{tno};-->
+<!--    </update>-->
 </mapper>

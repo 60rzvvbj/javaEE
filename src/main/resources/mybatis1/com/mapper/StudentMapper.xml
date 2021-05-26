@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis1.com.mapper.StudentMapper">
-<!--    <select id="selectStudentBySno" parameterType="String" resultType="mybatis1.com.po.Student">-->
-<!--        select *-->
-<!--        from stu-->
-<!--        where sno = #{sno};-->
-<!--    </select>-->
+    <!--    <select id="selectStudentBySno" parameterType="String" resultType="mybatis1.com.po.Student">-->
+    <!--        select *-->
+    <!--        from stu-->
+    <!--        where sno = #{sno};-->
+    <!--    </select>-->
     <select id="selectStudentBySname" parameterType="String" resultType="mybatis1.com.po.Student">
         select *
         from stu
@@ -48,7 +48,11 @@
         </foreach>
     </select>
     <select id="selectStudentScoresBySno" parameterType="String" resultMap="studentScoreMap">
-        select * from stu, sc where stu.sno=#{sno} and stu.sno = sc.sno;
+        select *
+        from stu,
+             sc
+        where stu.sno = #{sno}
+          and stu.sno = sc.sno;
     </select>
     <resultMap type="mybatis1.com.po.Student" id="studentScoreMap">
         <id property="sno" column="sno"/>
@@ -66,14 +70,22 @@
         </collection>
     </resultMap>
     <select id="selectStudentByCno" parameterType="Integer" resultType="mybatis1.com.po.Student">
-        select * from stu where sno in(
-            select sno from sc where cno=#{cno}
+        select *
+        from stu
+        where sno in (
+            select sno
+            from sc
+            where cno = #{cno}
         )
     </select>
     <select id="selectStudentCoursesBySno" parameterType="String" resultMap="studentCourseMap">
         select *
-        from stu s, course c, sc
-        where s.sno=#{sno} and s.sno = sc.sno and c.cno = sc.cno
+        from stu s,
+             course c,
+             sc
+        where s.sno = #{sno}
+          and s.sno = sc.sno
+          and c.cno = sc.cno
     </select>
     <resultMap type="mybatis1.com.po.Student" id="studentCourseMap">
         <id property="sno" column="sno"/>
@@ -87,4 +99,56 @@
             <result property="period" column="period"/>
         </collection>
     </resultMap>
+
+    <!--    实验六-->
+    <!--    <select id="selectStudentBySname" parameterType="String" resultType="com.po.Student">-->
+    <!--        select * from stu where sname like concat('%',#{sname},'%');-->
+    <!--    </select>-->
+
+    <!--    <insert id="insertStudent" parameterType="com.po.Student">-->
+    <!--        insert into stu(sno,sname,ssex,snative,mno) values(#{sno},#{sname},#{ssex},#{snative},#{mno});-->
+    <!--    </insert>-->
+
+    <!--    <delete id="deleteStudent" parameterType="String">-->
+    <!--        delete from stu where sno=#{sno}-->
+    <!--    </delete>-->
+
+    <!--    <update id="updateStudent" parameterType="com.po.Student">-->
+    <!--        update stu set sname=#{sname},ssex=#{ssex},snative=#{snative},mno=#{mno} where sno=#{sno}-->
+    <!--    </update>-->
 </mapper>
+
+
+        <!--实验六-->
+        <!--<?xml version="1.0" encoding="UTF-8"?>-->
+        <!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+        <!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+        <!--<mapper namespace="com.mapper.StudentMapper">-->
+        <!--    <select id="selectStudentBySno" parameterType="String" resultType="Student">-->
+        <!--        select *-->
+        <!--        from stu2-->
+        <!--        where sno = #{value};-->
+        <!--    </select>-->
+        <!--    <select resultType="com.po.Student" parameterType="String" id="selectStudentBySname">-->
+        <!--        select *-->
+        <!--        from stu2-->
+        <!--        where sname like concat('%', #{sname}, '%');-->
+        <!--    </select>-->
+        <!--    <insert parameterType="com.po.Student" id="insertStudent">-->
+        <!--        insert into stu2(sno, sname, ssex, snative, mno)-->
+        <!--        values (#{sno}, #{sname}, #{ssex}, #{snative}, #{mno});-->
+        <!--    </insert>-->
+        <!--    <delete parameterType="String" id="deleteStudent">-->
+        <!--        delete-->
+        <!--        from stu2-->
+        <!--        where sno = #{sno}-->
+        <!--    </delete>-->
+        <!--    <update parameterType="com.po.Student" id="updateStudent">-->
+        <!--        update stu2-->
+        <!--        set sname=#{sname},-->
+        <!--            ssex=#{ssex},-->
+        <!--            snative=#{snative},-->
+        <!--            mno=#{mno}-->
+        <!--        where sno = #{sno}-->
+        <!--    </update>-->
+        <!--</mapper>-->

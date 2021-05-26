@@ -2,11 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mybatis1.com.mapper.CourseMapper">
-<!--    <select id="selectCourseByCno" parameterType="Integer" resultType="mybatis1.com.po.Course">-->
-<!--        select *-->
-<!--        from course-->
-<!--        where cno = #{cno};-->
-<!--    </select>-->
+    <!--    <select id="selectCourseByCno" parameterType="Integer" resultType="mybatis1.com.po.Course">-->
+    <!--        select *-->
+    <!--        from course-->
+    <!--        where cno = #{cno};-->
+    <!--    </select>-->
     <select id="selectCourseByCname" parameterType="String" resultType="mybatis1.com.po.Course">
         select *
         from course
@@ -14,14 +14,16 @@
     </select>
     <insert id="insertCourse" parameterType="mybatis1.com.po.Course">
         insert into course(cno, cname, peroid)
-        values  (#{cno}, #{cname}, #{peroid});
+        values (#{cno}, #{cname}, #{peroid});
     </insert>
     <delete id="deleteCourse" parameterType="Integer">
-        delete from stu where cno = #{cno};
+        delete
+        from stu
+        where cno = #{cno};
     </delete>
     <update id="updateCourse" parameterType="mybatis1.com.po.Course">
         update course
-        set cname = #{cname},
+        set cname  = #{cname},
             peroid = #{peroid}
         where cno = #{cno}
     </update>
@@ -32,7 +34,11 @@
         </foreach>
     </select>
     <select id="selectCourseBookByCno" parameterType="Integer" resultMap="courseBookMap">
-        select *, b.id bid  from course c, book b where cno=#{cno} and b.id = c.cno;
+        select *, b.id bid
+        from course c,
+             book b
+        where cno = #{cno}
+          and b.id = c.cno;
     </select>
     <resultMap type="mybatis1.com.po.Course" id="courseBookMap">
         <id property="cno" column="cno"/>
@@ -46,17 +52,70 @@
         </association>
     </resultMap>
     <select id="selectCourseStudentsByCno" parameterType="Integer" resultMap="courseStudentMap">
-        select * from course where cno=#{cno};
+        select *
+        from course
+        where cno = #{cno};
     </select>
     <resultMap type="mybatis1.com.po.Course" id="courseStudentMap">
         <id property="cno" column="cno"/>
         <result property="cname" column="cname"/>
         <result property="period" column="period"/>
-        <collection property="studentList" column="cno" ofType="mybatis1.com.po.Student" select="mybatis1.com.mapper.StudentMapper.selectStudentByCno"/>
+        <collection property="studentList" column="cno" ofType="mybatis1.com.po.Student"
+                    select="mybatis1.com.mapper.StudentMapper.selectStudentByCno"/>
     </resultMap>
     <select id="selectCourseBySno" parameterType="Integer" resultType="mybatis1.com.po.Course">
-        select * from course where cno in(
-            select cno from sc where sno=#{sno}
+        select *
+        from course
+        where cno in (
+            select cno
+            from sc
+            where sno = #{sno}
         )
     </select>
+
+    <!--    实验六-->
+    <!--    <select id="selectCourseByCname" parameterType="String" resultType="comm.po.Course">-->
+    <!--        select * from course where cname like concat('%',#{cname},'%');-->
+    <!--    </select>-->
+    <!--    <insert id="insertCourse" parameterType="comm.po.Course">-->
+    <!--        insert into course(cno,cname,period) values(#{cno},#{cname},#{period});-->
+    <!--    </insert>-->
+    <!--    <delete id="deleteCourse" parameterType="String">-->
+    <!--        delete from course where cno=#{cno}-->
+    <!--    </delete>-->
+    <!--    <update id="updateCourse" parameterType="comm.po.Course">-->
+    <!--        update course set cname=#{cname},period=#{period} where cno=#{cno}-->
+    <!--    </update>-->
 </mapper>
+
+<!--实验六-->
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"-->
+<!--        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">-->
+<!--<mapper namespace="com.mapper.CourseMapper">-->
+<!--    <select id="selectCourseByCno" parameterType="Integer" resultType="Course">-->
+<!--        select *-->
+<!--        from course2-->
+<!--        where cno = #{value};-->
+<!--    </select>-->
+<!--    <select resultType="com.po.Course" parameterType="String" id="selectCourseByCname">-->
+<!--        select *-->
+<!--        from course2-->
+<!--        where cname like concat('%', #{cname}, '%');-->
+<!--    </select>-->
+<!--    <insert parameterType="com.po.Course" id="insertCourse">-->
+<!--        insert into course2 (cno, cname, peroid)-->
+<!--        values (#{cno}, #{cname}, #{peroid});-->
+<!--    </insert>-->
+<!--    <delete parameterType="Integer" id="deleteCourse">-->
+<!--        delete-->
+<!--        from course2-->
+<!--        where cno = #{cno}-->
+<!--    </delete>-->
+<!--    <update parameterType="com.po.Course" id="updateCourse">-->
+<!--        update course2-->
+<!--        set cname=#{cname},-->
+<!--            peroid=#{peroid}-->
+<!--        where cno = #{cno}-->
+<!--    </update>-->
+<!--</mapper>-->
